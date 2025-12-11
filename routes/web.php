@@ -1,9 +1,9 @@
 <?php
 
- use App\Domains\Core\Http\Controllers\DashboardController;
- 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
+use App\Domains\Core\Http\Controllers\DashboardController;
+use App\Domains\Core\Http\Controllers\DepartmentController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -19,11 +19,10 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])
         ->name('dashboard');
+    Route::resource('departments', DepartmentController::class)->names('departments');
 });
 
-
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

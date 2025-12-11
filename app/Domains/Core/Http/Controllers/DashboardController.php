@@ -11,26 +11,27 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        // Example: average program progress per department
-        $departmentKpis = Department::with('programs')
-            ->get()
-            ->map(function (Department $dept) {
-                $avgProgress = $dept->programs()->avg('progress_percent') ?? 0;
-                return [
-                    'name'    => $dept->name_en,
-                    'progress'=> round($avgProgress, 1),
-                ];
-            });
+        // // Example: average program progress per department
+        // $departmentKpis = Department::with('programs')
+        //     ->get()
+        //     ->map(function (Department $dept) {
+        //         $avgProgress = $dept->programs()->avg('progress_percent') ?? 0;
+        //         return [
+        //             'name'    => $dept->name_en,
+        //             'progress'=> round($avgProgress, 1),
+        //         ];
+        //     });
 
-        // Example: number of programs contributing directly to SDG 11
-        $sdg11Count = Program::whereHas('indicators', function ($q) {
-                $q->where('source_type', 'SDG')
-                  ->where('goal_code', '11');
-            })->count();
+        // // Example: number of programs contributing directly to SDG 11
+        // $sdg11Count = Program::whereHas('indicators', function ($q) {
+        //         $q->where('source_type', 'SDG')
+        //           ->where('goal_code', '11');
+        //     })->count();
 
-        return view('core.dashboard', [
-            'departmentKpis' => $departmentKpis,
-            'sdg11Count'     => $sdg11Count,
-        ]);
+        // return view('core.dashboard', [
+        //     'departmentKpis' => $departmentKpis,
+        //     'sdg11Count'     => $sdg11Count,
+        // ]);
+        return view('core.dashboard');
     }
 }
