@@ -4,10 +4,8 @@ namespace App\Domains\Core\Http\Controllers;
 
  
  
-use App\Domains\Core\Models\Sector;        4
+use App\Domains\Core\Models\Sector;         
 use App\Http\Controllers\Controller;
- 
-use App\Domains\Core\Models\Department;
 use App\Domains\Core\Http\Requests\SectorRequest;
 
 
@@ -36,13 +34,13 @@ class SectorController extends Controller
     public function store(SectorRequest $request)
     {
 
-        dd($request->all());
+       
         try {
             $data = $request->all();
-            Department::create($data);
+            Sector::create($data);
 
             return redirect()
-                ->route('departments.index')
+                ->route('sectors.index')
                 ->with('message', class_basename($this->model) . ' created successfully.');
         } catch (\Exception $e) {
             return redirect()

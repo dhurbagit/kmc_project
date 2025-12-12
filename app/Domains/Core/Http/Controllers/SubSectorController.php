@@ -4,8 +4,8 @@ namespace App\Domains\Core\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Domains\Core\Models\SubSector;
-use App\Domains\Core\Models\Department;
-use App\Domains\Core\Http\Requests\DepartmentRequest;
+use App\Domains\Core\Http\Requests\SubSectorRequest;
+use App\Domains\Core\Models\Sector;
 
 class SubSectorController extends Controller
 {
@@ -20,23 +20,25 @@ class SubSectorController extends Controller
     {
         // $programs = Program::with('department')->get();
 
- 
-        return view($this->viewPath . '.index');
+        $sectors = Sector::all();
+        return view($this->viewPath . '.index', compact('sectors'));
+      
     }
 
     public function create()
     {
-        return view($this->viewPath . '.index');
+           $sectors = Sector::all();
+        return view($this->viewPath . '.index', compact('sectors'));
     }
 
-    public function store(DepartmentRequest $request)
+    public function store(SubSectorRequest $request)
     {
         try {
             $data = $request->all();
-            Department::create($data);
+            SubSector::create($data);
 
             return redirect()
-                ->route('departments.index')
+                ->route('sub-sectors.index')
                 ->with('message', class_basename($this->model) . ' created successfully.');
         } catch (\Exception $e) {
             return redirect()

@@ -26,6 +26,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('sectors', \App\Domains\Core\Http\Controllers\SectorController::class)->names('sectors');
     Route::resource('sub-sectors', \App\Domains\Core\Http\Controllers\SubSectorController::class)->names('sub-sectors');
     Route::resource('main-programs', \App\Domains\Core\Http\Controllers\MainProgramController::class)->names('main-programs');
+    Route::resource('programs', \App\Domains\Core\Http\Controllers\ProgramController::class)->names('programs');
 });
 
 require __DIR__ . '/auth.php';
