@@ -23,6 +23,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])
         ->name('dashboard');
     Route::resource('departments', DepartmentController::class)->names('departments');
+    Route::resource('sectors', \App\Domains\Core\Http\Controllers\SectorController::class)->names('sectors');
+    Route::resource('sub-sectors', \App\Domains\Core\Http\Controllers\SubSectorController::class)->names('sub-sectors');
+    Route::resource('main-programs', \App\Domains\Core\Http\Controllers\MainProgramController::class)->names('main-programs');
 });
 
 require __DIR__ . '/auth.php';

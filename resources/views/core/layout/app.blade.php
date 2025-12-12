@@ -12,13 +12,16 @@
     <title>SB Admin 2 - Dashboard</title>
 
     <!-- Custom fonts for this template-->
-    <link href="{{ asset('core/vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('core/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="{{ asset('core/css/sb-admin-2.min.css')}}" rel="stylesheet">
+    <link href="{{ asset('core/css/sb-admin-2.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('core/css/style.css') }}" rel="stylesheet">
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
 </head>
 
@@ -28,7 +31,7 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-       @include('core.layout.sidebar')
+        @include('core.layout.sidebar')
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
@@ -44,7 +47,7 @@
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
                     @yield('content')
-                   
+
                 </div>
                 <!-- /.container-fluid -->
 
@@ -52,7 +55,7 @@
             <!-- End of Main Content -->
 
             <!-- Footer -->
-          @include('core.layout.footer')
+            @include('core.layout.footer')
             <!-- End of Footer -->
 
         </div>
@@ -87,22 +90,56 @@
     </div>
 
     <!-- Bootstrap core JavaScript-->
-    <script src="{{ asset('core/vendor/jquery/jquery.min.js')}}"></script>
-    <script src="{{ asset('core/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+    <script src="{{ asset('core/vendor/jquery/jquery.min.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script src="{{ asset('core/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
     <!-- Core plugin JavaScript-->
-    <script src="{{ asset('core/vendor/jquery-easing/jquery.easing.min.js')}}"></script>
+    <script src="{{ asset('core/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="{{ asset('core/js/sb-admin-2.min.js')}}"></script>
+    <script src="{{ asset('core/js/sb-admin-2.min.js') }}"></script>
 
     <!-- Page level plugins -->
-    <script src="{{ asset('core/vendor/chart.js/Chart.min.js')}}"></script>
+    <script src="{{ asset('core/vendor/chart.js/Chart.min.js') }}"></script>
 
     <!-- Page level custom scripts -->
-    <script src="{{ asset('core/js/demo/chart-area-demo.js')}}"></script>
-    <script src="{{ asset('core/js/demo/chart-pie-demo.js')}}"></script>
+    <script src="{{ asset('core/js/demo/chart-area-demo.js') }}"></script>
+    <script src="{{ asset('core/js/demo/chart-pie-demo.js') }}"></script>
+    <script>
+        // toster ja
+        @if (Session::has('message'))
+            toastr.options = {
+                "closeButton": true,
+                "progressBar": true
+            }
+            toastr.success("{{ session('message') }}");
+        @endif
 
+        @if (Session::has('error'))
+            toastr.options = {
+                "closeButton": true,
+                "progressBar": true
+            }
+            toastr.error("{{ session('error') }}");
+        @endif
+
+        @if (Session::has('info'))
+            toastr.options = {
+                "closeButton": true,
+                "progressBar": true
+            }
+            toastr.info("{{ session('info') }}");
+        @endif
+
+        @if (Session::has('warning'))
+            toastr.options = {
+                "closeButton": true,
+                "progressBar": true
+            }
+            toastr.warning("{{ session('warning') }}");
+        @endif
+    </script>
     @stack('scripts')
 
 </body>

@@ -2,26 +2,23 @@
 
 namespace App\Domains\Core\Http\Controllers;
 
- 
- 
-use App\Domains\Core\Models\Program;
 use App\Http\Controllers\Controller;
+use App\Domains\Core\Models\SubSector;
 use App\Domains\Core\Models\Department;
- 
 use App\Domains\Core\Http\Requests\DepartmentRequest;
 
-class DepartmentController extends Controller
+class SubSectorController extends Controller
 {
    
-    protected string $model = Department::class;
-    protected string $viewPath = 'core.department';
+    protected string $model = SubSector::class;
+    protected string $viewPath = 'core.sub_sector';
     // protected ?string $formRequest = ProgramRequest::class;
     // protected array $with = ['department'];
     // protected ?string $permissionPrefix = 'programs';  // Spatie
 
     public function index()
     {
-        $programs = Program::with('department')->get();
+        // $programs = Program::with('department')->get();
 
  
         return view($this->viewPath . '.index');

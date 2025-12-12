@@ -4,24 +4,25 @@ namespace App\Domains\Core\Http\Controllers;
 
  
  
-use App\Domains\Core\Models\Program;
+use App\Domains\Core\Models\Sector;        4
 use App\Http\Controllers\Controller;
-use App\Domains\Core\Models\Department;
  
-use App\Domains\Core\Http\Requests\DepartmentRequest;
+use App\Domains\Core\Models\Department;
+use App\Domains\Core\Http\Requests\SectorRequest;
 
-class DepartmentController extends Controller
+
+class SectorController extends Controller
 {
    
-    protected string $model = Department::class;
-    protected string $viewPath = 'core.department';
+    protected string $model = Sector::class;
+    protected string $viewPath = 'core.sector';
     // protected ?string $formRequest = ProgramRequest::class;
     // protected array $with = ['department'];
     // protected ?string $permissionPrefix = 'programs';  // Spatie
 
     public function index()
     {
-        $programs = Program::with('department')->get();
+        // $programs = Program::with('department')->get();
 
  
         return view($this->viewPath . '.index');
@@ -32,8 +33,10 @@ class DepartmentController extends Controller
         return view($this->viewPath . '.index');
     }
 
-    public function store(DepartmentRequest $request)
+    public function store(SectorRequest $request)
     {
+
+        dd($request->all());
         try {
             $data = $request->all();
             Department::create($data);

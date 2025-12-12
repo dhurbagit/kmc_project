@@ -4,10 +4,10 @@ namespace App\Domains\Core\Http\Controllers;
 
  
 use App\Domains\Core\Models\Program;
-use App\Http\Controllers\BaseCrudController;
 use App\Domains\Core\Http\Requests\ProgramRequest;
+use App\Http\Controllers\Controller;
 
-class ProgramController extends BaseCrudController
+class ProgramController extends Controller
 {
    
 

@@ -5,77 +5,57 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration {
-    /**
-     * Run the migrations.
-     */
-    // database/migrations/xxxx_xx_xx_create_programs_table.php
+
     public function up(): void
     {
         Schema::create('programs', function (Blueprint $table) {
             $table->id();
 
-            $table
-                ->foreignId('department_id')
-                ->constrained('departments')
-                ->cascadeOnDelete();
+            // Department (शाखा / विभाग)
+            $table->foreignId('department_id')->constrained('departments')->cascadeOnDelete();
 
-            $table
-                ->foreignId('sector_id')
-                ->nullable()
-                ->constrained('sectors')
+            // Sector (क्षेत्र)
+            $table->foreignId('sector_id')->nullable()->constrained('sectors')->nullOnDelete();
+
+            // Sub-Sector (उपक्षेत्र)
+            $table->foreignId('sub_sector_id')->nullable()->constrained('sub_sectors')
                 ->nullOnDelete();
 
-            $table
-                ->foreignId('sub_sector_id')
-                ->nullable()
-                ->constrained('sub_sectors')
-                ->nullOnDelete();
+            // Main Program (मुख्य कार्यक्रम) – correct table reference!
+            $table->foreignId('main_program_id')->nullable()->constrained('main_programs')->nullOnDelete();
 
-            // ⚠ self-FK: by default constrained() on main_program_id
-            // would look for "main_programs" table 👎
-            $table
-                ->foreignId('main_program_id')
-                ->nullable()
-                ->constrained('programs')
-                ->nullOnDelete();
-
+            // Program identifiers
             $table->string('code')->nullable();
             $table->string('kharcha_sanket')->nullable();
 
+            // Names
             $table->string('name_en');
             $table->string('name_ne')->nullable();
 
+            // Description
             $table->text('objective')->nullable();
-            $table->year('fiscal_year')->nullable();
 
-            $table
-                ->enum('lifecycle_status', ['incept', 'approved', 'ongoing', 'complete'])
-                ->default('incept');
+            // Fiscal year (string because 2081/82 is not numeric year)
+            $table->string('fiscal_year')->nullable();
 
+            // Status
+            $table->enum('lifecycle_status', [
+                'incept',      // conceptual
+                'approved',    // budget-approved
+                'ongoing',     // running
+                'complete',    // finished
+            ])->default('incept');
+
+            // Progress %
             $table->unsignedTinyInteger('progress_percent')->default(0);
 
             $table->timestamps();
+
+            // OPTIONAL — uncomment this line ONLY IF your Program model uses SoftDeletes
+            $table->softDeletes();
         });
     }
 
-    //     id: 101
-    // department_id: 2 (Urban Management)
-    // sector_id: 1 (Smart Governance)
-    // sub_sector_id: null
-    // main_program_id: 3
-
-    // code: "UMD-2081-005"
-    // kharcha_sanket: "3370132"
-
-    // name_en: "Construction of Indoor Sports Hall for Senior Citizens"
-    // name_ne: "जेष्ठ नागरिकका लागि ईन्डोर खेलकुद हल निर्माण"
-    // fiscal_year: 2081
-    // lifecycle_status: "approved"
-    // progress_percent: 40
-
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('programs');

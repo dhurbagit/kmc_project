@@ -51,13 +51,15 @@
             </p>Department Page</p>
         </div>
         <div class="card-body">
-            <div class="row">
+           <form action="{{ route('departments.store') }}" method="POST"> 
+            @csrf
+             <div class="row">
                 <div class="col-lg-5">
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="form-group">
                                 <label for="name">Department Name</label>
-                                <select name="code" id="code" class="form-control" disabled>
+                                <select name="code" id="code" class="form-control readonly-select">
                                     <option selected value="">Select a Department</option>
                                     @foreach ($departments as $department)
                                         <option readonly value="{{ $department['code'] }}">{{ $department['code'] }}
@@ -75,12 +77,15 @@
                                         <option value="{{ $department['name_en'] }}">{{ $department['name_en'] }}</option>
                                     @endforeach
                                 </select>
+                                @error('name_en')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
                         </div>
                         <div class="col-lg-12">
                             <div class="form-group">
                                 <label for="name">Department Name in Nepali</label>
-                                <select name="name_ne" id="name_ne" class="form-control" disabled>
+                                <select name="name_ne" id="name_ne" class="form-control readonly-select">
                                     <option selected value="">Select a Department</option>
                                     @foreach ($departments as $department)
                                         <option value="{{ $department['name_ne'] }}">{{ $department['name_ne'] }}</option>
@@ -88,9 +93,19 @@
                                 </select>
                             </div>
                         </div>
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label for="description">Description</label>
+                                <textarea name="description" id="description" class="form-control" rows="4"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <button type="submit" class="btn btn-success">Save</button>
+                        </div>
                     </div>
                 </div>
             </div>
+           </form>
         </div>
 
     </div>

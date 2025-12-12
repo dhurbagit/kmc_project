@@ -42,6 +42,49 @@
                 </div>
             </li>
 
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSector"
+                    aria-expanded="true" aria-controls="collapseSector">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Sector</span>
+                </a>
+                <div id="collapseSector" class="collapse" aria-labelledby="headingSector" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Sector Components:</h6>
+                        <a class="collapse-item" href="{{ route('sectors.create') }}">Create New</a>
+                        <a class="collapse-item" href="{{ route('sectors.index') }}">List View</a>
+                    </div>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSubSector"
+                    aria-expanded="true" aria-controls="collapseSubSector">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Sub Sector</span>
+                </a>
+                <div id="collapseSubSector" class="collapse" aria-labelledby="headingSubSector" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Sub Sector Components:</h6>
+                        <a class="collapse-item" href="{{ route('sub-sectors.create') }}">Create New</a>
+                        <a class="collapse-item" href="{{ route('sub-sectors.index') }}">List View</a>
+                    </div>
+                </div>
+            </li>
+            <li class="nav-item"> 
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsemain_program"
+                    aria-expanded="true" aria-controls="collapsemain_program">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Main Program</span>
+                </a>
+                <div id="collapsemain_program" class="collapse" aria-labelledby="headingmain_program" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Main Program Components:</h6>
+                        <a class="collapse-item" href="{{ route('main-programs.create') }}">Create New</a>
+                        <a class="collapse-item" href="{{ route('main-programs.index') }}">List View</a>
+                    </div>
+                </div>
+            </li>
+
             <!-- Nav Item - Utilities Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
