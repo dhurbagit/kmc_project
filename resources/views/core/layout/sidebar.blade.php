@@ -84,6 +84,20 @@
                     </div>
                 </div>
             </li>
+            <li class="nav-item"> 
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseprograms"
+                    aria-expanded="true" aria-controls="collapseprograms">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Program</span>
+                </a>
+                <div id="collapseprograms" class="collapse" aria-labelledby="headingprograms" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Main Program Components:</h6>
+                        <a class="collapse-item" href="{{ route('programs.create') }}">Create New</a>
+                        <a class="collapse-item" href="{{ route('programs.index') }}">List View</a>
+                    </div>
+                </div>
+            </li>
 
             <!-- Nav Item - Utilities Collapse Menu -->
             <li class="nav-item">

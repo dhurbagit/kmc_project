@@ -46,9 +46,8 @@
                             <div class="col-lg-12">
                                 <div class="form-group">
                                     <label for="name_en">English Name</label>
-                                    <select name="name_en" id="name_en" class="form-control">
-                                        <option value=""></option>
-                                    </select>
+                                    <input type="text" class="form-control" id="name_en" name="name_en"
+                                        placeholder="English Name">
                                     @error('name_en')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -57,9 +56,8 @@
                             <div class="col-lg-12">
                                 <div class="form-group">
                                     <label for="name_ne">Nepali Name</label>
-                                    <select name="name_ne" id="name_ne" class="form-control">
-                                        <option value=""></option>
-                                    </select>
+                                    <input type="text" class="form-control" id="name_ne" name="name_ne"
+                                        placeholder="Eg: मुख्य कार्यक्रम नाम (unicode format)">
                                 </div>
                             </div>
                             <div class="col-lg-12">
