@@ -22,16 +22,22 @@ class DepartmentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name_en' => 'required|string|max:255',
+            'code' => 'required|string|max:255|unique:departments,code',
+            'name_ne' => 'required|string|max:255|unique:departments,name_ne',
+         
         ];
     }
 
     public function messages(): array
     {
         return [
-            'name_en.required' => 'The English name field is required.',
-            'name_en.string' => 'The English name must be a string.',
-            'name_en.max' => 'The English name may not be greater than 255 characters.',
+            'code.required' => 'The Department code is required.',
+            'code.string' => 'The Department code must be a string.',
+            'code.max' => 'The Department code may not be greater than 255 characters.',
+            'name_ne.required' => 'The Department name field is required.',
+            'name_ne.string' => 'The Department name must be a string.',
+            'name_ne.max' => 'The Department name may not be greater than 255 characters.',
+            'name_ne.unique' => 'The Department name already exists.',
         ];
     }   
 }

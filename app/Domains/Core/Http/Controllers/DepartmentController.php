@@ -13,13 +13,23 @@ class DepartmentController extends Controller
 
    public function index()
     {
-        return view($this->viewPath . '.index');
+        $departments_collection = Department::all();
+        return view($this->viewPath . '.index', compact('departments_collection'));
     }    
      
     public function create()
     {
-        return view($this->viewPath . '.index');
+       $departments_collection = Department::all();
+        return view($this->viewPath . '.index', compact('departments_collection'));
     }
+
+    public function edit(Department $department)
+    {
+        $departments_collection = Department::all();
+        $editDepartment = Department::find($department->id);
+        return view($this->viewPath . '.index', compact('editDepartment', 'departments_collection'));
+    }
+
     public function store(DepartmentRequest $request)
     {
         try {

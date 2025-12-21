@@ -51,114 +51,133 @@
             </p>Department Page</p>
         </div>
         <div class="card-body">
-           <form action="{{ route('departments.store') }}" method="POST"> 
-            @csrf
-             <div class="row">
-                <div class="col-lg-5">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="form-group hidden">
-                                {{-- <label for="name">Department Code</label> --}}
-                                <select name="code" id="code" class="form-control readonly-select" hidden>
-                                    <option selected value="">Select a Department</option>
-                                    @foreach ($departments as $department)
-                                        <option readonly value="{{ $department['code'] }}">{{ $department['code'] }}
-                                        </option>
+            <form action="{{ route('departments.store') }}" method="POST">
+                @csrf
+                <div class="row">
+                    <div class="col-lg-5">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="form-group hidden">
+                                    {{-- <label for="name">Department Code</label> --}}
+                                    <select name="code" id="code" class="form-control readonly-select" hidden>
+                                        <option selected value="">Select a Department</option>
+                                        @foreach ($departments as $department)
+                                            <option  
+                                             readonly value="{{ $department['code'] }}">{{ $department['code'] }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    {{-- <label for="name">Department Name in English</label> --}}
+                                    <select name="name_en" id="name_en" class="form-control readonly-select" hidden>
+                                        <option selected value="">Select a Department</option>
+                                        @foreach ($departments as $department)
+                                            <option value="{{ $department['name_en'] }}">{{ $department['name_en'] }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label for="name">Department Name in Nepali</label>
+                                    <select name="name_ne" id="name_ne" class="form-control ">
+                                        <option selected value="">Select a Department</option>
+                                        @foreach ($departments as $department)
+                                            <option   {{ old('name_ne', $editDepartment->name_ne ?? '') == $department['name_ne'] ? 'selected' : '' }}
+                                            value="{{ $department['name_ne'] }}">{{ $department['name_ne'] }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    @error('name_ne')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label for="description">Description</label>
+                                    <textarea name="description" id="description" class="form-control" rows="4"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <button type="submit" class="btn btn-success">Save</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </form>
+            <br>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="department_table_data">
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th>SNo</th>
+                                        <th>Department Code</th>
+                                        <th>Department Name (English)</th>
+                                        <th>Department Name (Nepali)</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($departments_collection as $department)
+                                        <tr>
+                                            <td>{{ $loop->iteration }}</td>
+                                            <td>{{ $department['code'] }}</td>
+                                            <td>{{ $department['name_en'] }}</td>
+                                            <td>{{ $department['name_ne'] }}</td>
+                                            <td>
+                                                <a href="{{ route('departments.edit', $department['id']) }}" class="btn btn-primary">
+                                                    <i class="fa-solid fa-pen-to-square"></i>
+                                                </a>
+                                                <a href="" class="btn btn-secondary">
+                                                    <i class="fa-solid fa-trash"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
                                     @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-lg-12">
-                            <div class="form-group">
-                                {{-- <label for="name">Department Name in English</label> --}}
-                                <select name="name_en" id="name_en" class="form-control readonly-select" hidden>
-                                    <option selected value="">Select a Department</option>
-                                    @foreach ($departments as $department)
-                                        <option value="{{ $department['name_en'] }}">{{ $department['name_en'] }}</option>
-                                    @endforeach
-                                </select>
-                                @error('name_en')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="col-lg-12">
-                            <div class="form-group">
-                                <label for="name">Department Name in Nepali</label>
-                                <select name="name_ne" id="name_ne" class="form-control ">
-                                    <option selected value="">Select a Department</option>
-                                    @foreach ($departments as $department)
-                                        <option value="{{ $department['name_ne'] }}">{{ $department['name_ne'] }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-lg-12">
-                            <div class="form-group">
-                                <label for="description">Description</label>
-                                <textarea name="description" id="description" class="form-control" rows="4"></textarea>
-                            </div>
-                        </div>
-                        <div class="col-lg-12">
-                            <button type="submit" class="btn btn-success">Save</button>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
-                
             </div>
-           </form>
-<br>
-           <div class="row">
-            <div class="col-lg-12">
-                <div class="department_table_data">
-                    <table class="table table-bordered">
-                        <thead></thead>
-                            <tr>
-                                <th>Department Code</th>
-                                <th>Department Name (English)</th>
-                                <th>Department Name (Nepali)</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($departments as $department)
-                                <tr>
-                                    <td>{{ $department['code'] }}</td>
-                                    <td>{{ $department['name_en'] }}</td>
-                                    <td>{{ $department['name_ne'] }}</td>
-                                    <td></td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-           </div>
         </div>
 
     </div>
 @endsection
-
 @push('scripts')
 <script>
-    const departmentData = @json(
-        collect($departments)->mapWithKeys(function ($d) {
-            return [
-                $d['name_ne'] => [
-                    'code' => $d['code'],
-                    'name_ne' => $d['name_en']
-                ]
-            ];
-        })
-    );
+const departmentData = @json(
+    collect($departments)->mapWithKeys(function ($d) {
+        return [
+            $d['name_ne'] => [
+                'code'    => $d['code'],
+                'name_en' => $d['name_en'],
+            ]
+        ];
+    })
+);
 
-    document.getElementById('name_ne').addEventListener('change', function() {
-        const selected = this.value;
-        const info = departmentData[selected] || { code: "", name_en: "" };
+document.getElementById('name_ne').addEventListener('change', function () {
+    const selected = this.value;
 
-        document.getElementById('code').value = info.code;
-        document.getElementById('name_en').value = info.name_ne;
-    });
+    const info = departmentData[selected] || {
+        code: "",
+        name_en: ""
+    };
+
+    document.getElementById('code').value = info.code;
+    document.getElementById('name_en').value = info.name_en;
+});
 </script>
 @endpush
 

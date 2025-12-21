@@ -12,7 +12,7 @@
                             <div class="col-lg-12">
                                 <div class="form-group">
                                     <label for="name_en">Source Type</label>
-                                    <select name="source_type" class="form-control" required>
+                                    <select name="source_type" class="form-control" >
                                         <option value="">Select Source</option>
                                         <option value="SDG">SDG</option>
                                         <option value="ISO37120">ISO 37120</option>
@@ -28,7 +28,7 @@
                                 <div class="form-group">
                                     <label class="form-label">Indicator Code</label>
                                     <input type="text" name="code" class="form-control"
-                                        placeholder="e.g. 11.5.1 / 6.3 / DRR-01" required>
+                                        placeholder="e.g. 11.5.1 / 6.3 / DRR-01" >
                                         @error('code')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -38,7 +38,7 @@
                                 <div class="form-group">
                                     <label class="form-label">Short Name</label>
                                     <input type="text" name="short_name" class="form-control"
-                                        placeholder="e.g. Disaster mortality rate" required>
+                                        placeholder="e.g. Disaster mortality rate" >
                                         @error('short_name')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
